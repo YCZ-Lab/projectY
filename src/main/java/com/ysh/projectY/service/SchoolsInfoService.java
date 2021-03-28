@@ -22,11 +22,27 @@ public class SchoolsInfoService {
     }
 
     public List<SchoolsInfo> findAll() {
-        Sort sort = Sort.by(Sort.Direction.ASC, "schoolName");
+        Sort sort = Sort.by(Sort.Direction.ASC, "id");
         return schoolsInfoDao.findAll(sort);
     }
 
     public Optional<SchoolsInfo> findById(int id) {
         return schoolsInfoDao.findById(id);
+    }
+
+    public void saveAndFlush(SchoolsInfo schoolsInfo) {
+        schoolsInfoDao.saveAndFlush(schoolsInfo);
+    }
+
+    public List<SchoolsInfo> findAllByPostalcode() {
+        return schoolsInfoDao.findAllByPostalcode();
+    }
+
+    public Optional<SchoolsInfo> findByExternalImportNameContaining(String schoolName) {
+        return schoolsInfoDao.findByExternalImportNameContaining(schoolName);
+    }
+
+    public int countByExternalImportNameContaining(String schoolName) {
+        return schoolsInfoDao.countByExternalImportNameContaining(schoolName);
     }
 }

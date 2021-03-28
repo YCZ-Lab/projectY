@@ -3,6 +3,7 @@ package com.ysh.projectY.service;
 import com.ysh.projectY.dao.BCSchoolsCOVID19Dao;
 import com.ysh.projectY.entity.BCSchoolsCOVID19;
 import com.ysh.projectY.form.*;
+import com.ysh.projectY.utils.MethodResponse;
 import com.ysh.projectY.utils.dateTools;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -10,10 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class BCSchoolsCOVID19Service {
@@ -64,13 +62,13 @@ public class BCSchoolsCOVID19Service {
     public Optional<BCSchoolsCOVID19TotalSummary> getBCSchoolsCOVID19TotalSummary() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         BCSchoolsCOVID19TotalSummary bcSchoolsCOVID19TotalSummary = new BCSchoolsCOVID19TotalSummary();
-        final long total = bcSchoolsCOVID19Dao.count();
+        final long total = bcSchoolsCOVID19Dao.getSum();
         bcSchoolsCOVID19TotalSummary.setTotal(total);
-        String updateDate = "2021-02-18";
+        String updateDate = "2021-03-24";
         bcSchoolsCOVID19TotalSummary.setUpdateDateTime(updateDate);
         Date temp = null;
         try {
-            temp = sdf.parse("2021-02-16");
+            temp = sdf.parse("2021-03-24");
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -116,5 +114,18 @@ public class BCSchoolsCOVID19Service {
 
     public Set<BCSchoolCOVID19DailySummary> getBCSchoolCOVID19DailySummary(String startDate, String endDate, int schoolId) {
         return bcSchoolsCOVID19Dao.countByNotificationDateGroupBySchoolId(startDate, endDate, schoolId);
+    }
+
+    public MethodResponse getBCSchoolsCOVID19GoogleMapSummary() {
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            final Calendar cal = Calendar.getInstance();
+            cal.add(Calendar.DATE, -40);
+            Set<BCSchoolsCOVID19GoogleMapSummary> bcSchoolsCOVID19GoogleMapSummary = bcSchoolsCOVID19Dao.getBCSchoolsCOVID19GoogleMapSummary(sdf.format(cal.getTime()));
+            return MethodResponse.success("projectY.BCSchoolsCOVID19Service.getBCSchoolsCOVID19GoogleMapSummary.success", "", bcSchoolsCOVID19GoogleMapSummary);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return MethodResponse.failure("projectY.BCSchoolsCOVID19Service.getBCSchoolsCOVID19GoogleMapSummary.failure.Exception", e.toString(), null);
+        }
     }
 }

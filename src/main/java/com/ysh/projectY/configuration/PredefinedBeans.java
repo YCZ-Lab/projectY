@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.embedded.tomcat.TomcatContextCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
-import org.springframework.session.web.http.CookieSerializer;
-import org.springframework.session.web.http.DefaultCookieSerializer;
+//import org.springframework.session.web.http.CookieSerializer;
+//import org.springframework.session.web.http.DefaultCookieSerializer;
 import org.springframework.stereotype.Component;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
@@ -45,15 +45,15 @@ public class PredefinedBeans {
     }
 
     //添加spring-session-data-redis后, 解决SameSite跨域问题
-    @Bean
-    public CookieSerializer httpSessionIdResolver() {
-        DefaultCookieSerializer cookieSerializer = new DefaultCookieSerializer();
-        if (sslEnabled) {
-            cookieSerializer.setSameSite(SameSiteCookies.NONE.getValue());
-        }
-        cookieSerializer.setCookieName("PHPSESSID");
-        return cookieSerializer;
-    }
+//    @Bean
+//    public CookieSerializer httpSessionIdResolver() {
+//        DefaultCookieSerializer cookieSerializer = new DefaultCookieSerializer();
+//        if (sslEnabled) {
+//            cookieSerializer.setSameSite(SameSiteCookies.NONE.getValue());
+//        }
+//        cookieSerializer.setCookieName("PHPSESSID");
+//        return cookieSerializer;
+//    }
 
     @Bean
     CorsConfigurationSource corsConfigurationSource() {

@@ -39,8 +39,8 @@ public class BCSchoolsCOVID19 implements Serializable {
     private String cityName;
 
     // 双向关联
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    private HealthRegion healthRegion;
+    @ManyToOne(fetch = FetchType.EAGER)
+    private HealthRegion healthRegion;
 
     @Column(name = "`health_id`", columnDefinition = "int NOT NULL comment '卫生局ID'")
     private int healthId;
@@ -139,13 +139,13 @@ public class BCSchoolsCOVID19 implements Serializable {
         this.cityName = cityName;
     }
 
-//    public HealthRegion getHealthRegion() {
-//        return healthRegion;
-//    }
-//
-//    public void setHealthRegion(HealthRegion healthRegion) {
-//        this.healthRegion = healthRegion;
-//    }
+    public HealthRegion getHealthRegion() {
+        return healthRegion;
+    }
+
+    public void setHealthRegion(HealthRegion healthRegion) {
+        this.healthRegion = healthRegion;
+    }
 
 
     public String getHealthRegionName() {

@@ -4,7 +4,6 @@ import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Set;
 
 @Entity(name = "schools_info")
 public class SchoolsInfo implements Serializable {
@@ -17,8 +16,14 @@ public class SchoolsInfo implements Serializable {
     @Column(name = "`school_code`", columnDefinition = "varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL comment '学校编码'")
     private String schoolCode;
 
-    @Column(name = "`school_name`", columnDefinition = "varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL comment '学校名称'")
+    @Column(name = "`school_name`", columnDefinition = "varchar(512) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL comment '学校名称'")
     private String schoolName;
+
+    @Column(name = "`school_name_google_name`", columnDefinition = "varchar(512) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL comment '学校名称(Google Map)'")
+    private String schoolNameGoogleMap;
+
+    @Column(name = "`external_import_name`", columnDefinition = "varchar(512) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL comment '匹配外部导入数据的学校名称'")
+    private String externalImportName;
 
     @ColumnDefault("1")
     @Column(name = "`enabled`", columnDefinition = "tinyint(1) NOT NULL comment '启用/禁用'")
@@ -35,7 +40,7 @@ public class SchoolsInfo implements Serializable {
     @Column(name = "`no_district_number`", columnDefinition = "varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL comment '教育局编号'")
     private String noDistrictNumber;
 
-    @Column(name = "`school_address`", columnDefinition = "varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL comment '学校地址'")
+    @Column(name = "`school_address`", columnDefinition = "varchar(512) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL comment '学校地址'")
     private String schoolAddress;
 
     @Column(name = "`postal_code`", columnDefinition = "varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL comment '邮编'")
@@ -46,6 +51,15 @@ public class SchoolsInfo implements Serializable {
 
     @Column(name = "`latitude`", columnDefinition = "decimal(10,6) NOT NULL comment '纬度'")
     private Double latitude;
+
+    @Column(name = "`school_address_google_map`", columnDefinition = "varchar(512) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL comment '学校地址(Google Map)'")
+    private String schoolAddressGoogleMap;
+
+    @Column(name = "`postal_code_google_map`", columnDefinition = "varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL comment '邮编(Google Map)'")
+    private String postalCodeGoogleMap;
+
+    @Column(name = "`place_id_google_map`", columnDefinition = "varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL comment '位置ID(Google Map)'")
+    private String placeIdGoogleMap;
 
     // 双向关联
     @ManyToOne(fetch = FetchType.EAGER)
@@ -107,6 +121,15 @@ public class SchoolsInfo implements Serializable {
 
     @Column(name = "`school_email`", columnDefinition = "varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL comment '电子邮件'")
     private String schoolEmail;
+
+    @Column(name = "`school_phone_google_map`", columnDefinition = "varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL comment '电话(Google Map)'")
+    private String schoolPhoneGoogleMap;
+
+    @Column(name = "`google_map_url_google_map`", columnDefinition = "varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL comment 'URL(Google Map)'")
+    private String googleMapUrlGoogleMap;
+
+    @Column(name = "`school_website_google_map`", columnDefinition = "varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL comment '学校网站(Google Map)'")
+    private String schoolWebsiteGoogleMap;
 
     @Column(name = "`enrolment_total`", columnDefinition = "int NOT NULL comment '招生总数'")
     private int enrolmentTotal;
@@ -189,6 +212,22 @@ public class SchoolsInfo implements Serializable {
         this.schoolName = schoolName;
     }
 
+    public String getSchoolNameGoogleMap() {
+        return schoolNameGoogleMap;
+    }
+
+    public void setSchoolNameGoogleMap(String schoolNameGoogleMap) {
+        this.schoolNameGoogleMap = schoolNameGoogleMap;
+    }
+
+    public String getExternalImportName() {
+        return externalImportName;
+    }
+
+    public void setExternalImportName(String externalImportName) {
+        this.externalImportName = externalImportName;
+    }
+
     public boolean isEnabled() {
         return enabled;
     }
@@ -251,6 +290,30 @@ public class SchoolsInfo implements Serializable {
 
     public void setLatitude(Double latitude) {
         this.latitude = latitude;
+    }
+
+    public String getSchoolAddressGoogleMap() {
+        return schoolAddressGoogleMap;
+    }
+
+    public void setSchoolAddressGoogleMap(String schoolAddressGoogleMap) {
+        this.schoolAddressGoogleMap = schoolAddressGoogleMap;
+    }
+
+    public String getPostalCodeGoogleMap() {
+        return postalCodeGoogleMap;
+    }
+
+    public void setPostalCodeGoogleMap(String postalCodeGoogleMap) {
+        this.postalCodeGoogleMap = postalCodeGoogleMap;
+    }
+
+    public String getPlaceIdGoogleMap() {
+        return placeIdGoogleMap;
+    }
+
+    public void setPlaceIdGoogleMap(String placeIdGoogleMap) {
+        this.placeIdGoogleMap = placeIdGoogleMap;
     }
 
     public CitiesInfo getCitiesInfo() {
@@ -411,6 +474,30 @@ public class SchoolsInfo implements Serializable {
 
     public void setSchoolEmail(String schoolEmail) {
         this.schoolEmail = schoolEmail;
+    }
+
+    public String getSchoolPhoneGoogleMap() {
+        return schoolPhoneGoogleMap;
+    }
+
+    public void setSchoolPhoneGoogleMap(String schoolPhoneGoogleMap) {
+        this.schoolPhoneGoogleMap = schoolPhoneGoogleMap;
+    }
+
+    public String getGoogleMapUrlGoogleMap() {
+        return googleMapUrlGoogleMap;
+    }
+
+    public void setGoogleMapUrlGoogleMap(String googleMapUrlGoogleMap) {
+        this.googleMapUrlGoogleMap = googleMapUrlGoogleMap;
+    }
+
+    public String getSchoolWebsiteGoogleMap() {
+        return schoolWebsiteGoogleMap;
+    }
+
+    public void setSchoolWebsiteGoogleMap(String schoolWebsiteGoogleMap) {
+        this.schoolWebsiteGoogleMap = schoolWebsiteGoogleMap;
     }
 
     public int getEnrolmentTotal() {

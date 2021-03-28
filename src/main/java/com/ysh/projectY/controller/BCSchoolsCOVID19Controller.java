@@ -4,6 +4,7 @@ import com.ysh.projectY.entity.BCSchoolsCOVID19;
 import com.ysh.projectY.form.*;
 import com.ysh.projectY.service.BCSchoolsCOVID19Service;
 import com.ysh.projectY.utils.JsonResponse;
+import com.ysh.projectY.utils.MethodResponse;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -124,4 +125,12 @@ public class BCSchoolsCOVID19Controller {
         return new ResponseEntity<>(JsonResponse.success(HttpStatus.OK.value(), "projectY.BCSchoolsCOVID19Controller.getBCSchoolCOVID19DailySummary.success", bcSchoolCOVID19DailySummary, "!!!"), HttpStatus.OK);
     }
 
+    @GetMapping("/public/bcSchoolsCOVID19GoogleMapSummary")
+    public HttpEntity<?> getBCSchoolsCOVID19GoogleMapSummary() {
+        final MethodResponse methodResponse = bcSchoolsCOVID19Service.getBCSchoolsCOVID19GoogleMapSummary();
+        if (!methodResponse.isSuccess()) {
+            return new ResponseEntity<>(JsonResponse.failure(HttpStatus.UNPROCESSABLE_ENTITY.value(), methodResponse.getI18nMessageKey(), methodResponse.getData(), methodResponse.getDetail()), HttpStatus.OK);
+        }
+        return new ResponseEntity<>(JsonResponse.success(HttpStatus.OK.value(), methodResponse.getI18nMessageKey(), methodResponse.getData(), methodResponse.getDetail()), HttpStatus.OK);
+    }
 }
