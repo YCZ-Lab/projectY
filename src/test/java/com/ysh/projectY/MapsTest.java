@@ -217,7 +217,7 @@ public class MapsTest {
         }
     }
 
-    @Test
+    //    @Test
     public void place() throws InterruptedException, ApiException, IOException {
         final GeoApiContext.Builder builder = new GeoApiContext.Builder();
         builder.queryRateLimit(500);

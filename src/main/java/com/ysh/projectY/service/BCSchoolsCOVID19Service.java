@@ -64,7 +64,7 @@ public class BCSchoolsCOVID19Service {
         BCSchoolsCOVID19TotalSummary bcSchoolsCOVID19TotalSummary = new BCSchoolsCOVID19TotalSummary();
         final long total = bcSchoolsCOVID19Dao.getSum();
         bcSchoolsCOVID19TotalSummary.setTotal(total);
-        String updateDate = "2021-03-24";
+        String updateDate = "2021-03-28";
         bcSchoolsCOVID19TotalSummary.setUpdateDateTime(updateDate);
         Date temp = null;
         try {
@@ -120,7 +120,7 @@ public class BCSchoolsCOVID19Service {
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             final Calendar cal = Calendar.getInstance();
-            cal.add(Calendar.DATE, -40);
+            cal.add(Calendar.DATE, -14);
             Set<BCSchoolsCOVID19GoogleMapSummary> bcSchoolsCOVID19GoogleMapSummary = bcSchoolsCOVID19Dao.getBCSchoolsCOVID19GoogleMapSummary(sdf.format(cal.getTime()));
             return MethodResponse.success("projectY.BCSchoolsCOVID19Service.getBCSchoolsCOVID19GoogleMapSummary.success", "", bcSchoolsCOVID19GoogleMapSummary);
         } catch (Exception e) {

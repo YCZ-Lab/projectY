@@ -11,7 +11,7 @@ class ProjectYTests {
     @Autowired
     ImportBCSchoolsCOVID19 importBCSchoolsCOVID19;
 
-    @Test
+    //    @Test
 //    @Transactional(readOnly = true)
     void contextLoads() {
         importBCSchoolsCOVID19.importBCSchoolsCOVID19Info();
