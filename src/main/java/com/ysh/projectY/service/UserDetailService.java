@@ -40,7 +40,6 @@ public class UserDetailService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        System.out.println("loadUserByUsername(String username=" + username + ")");
         User user = userDao.loadUserByUserName(username);
         if (user == null) {
             throw new UsernameNotFoundException("account not found!!!");
@@ -73,9 +72,9 @@ public class UserDetailService implements UserDetailsService {
         try {
             user = (User) authentication.getPrincipal();
         } catch (ClassCastException e) {
-            e.printStackTrace();
-            System.out.println(authentication.getPrincipal());
-            return MethodResponse.failure("projectY.UserService.getUser.failure.ClassCastException", e.toString());
+            final Optional<User> guest = userDao.findById(99999);
+            user = guest.get();
+//            return MethodResponse.failure("projectY.UserService.getUser.failure.ClassCastException", e.toString());
         } catch (Exception e) {
             e.printStackTrace();
             return MethodResponse.failure("projectY.UserService.getUser.failure.Exception", e.toString());
@@ -119,7 +118,6 @@ public class UserDetailService implements UserDetailsService {
     }
 
     public MethodResponse updateUser(UpdateUser updateUser) {
-        System.out.println("updateUser: " + updateUser);
         final Optional<User> optional = userDao.findById(updateUser.getId());
         User user = optional.get();
         String newNickName = updateUser.getNickname();
@@ -224,14 +222,14 @@ public class UserDetailService implements UserDetailsService {
 //        String realPath = req.getSession(false).getServletContext().getRealPath("/uploadFile/");
         final String property = System.getProperty("catalina.home");
         String realPath = property + File.separator + "work" + File.separator + "resource" + File.separator + "avatars" + File.separator;
-        System.out.println("realPath: " + realPath);
+//        System.out.println("realPath: " + realPath);
         String format = sdf.format(new Date());
         File folder = new File(realPath + format);
         if (!folder.isDirectory()) {
             folder.mkdirs();
         }
-        System.out.println(folder.getAbsolutePath());
-        System.out.println(folder.getPath());
+//        System.out.println(folder.getAbsolutePath());
+//        System.out.println(folder.getPath());
         String oldName = uploadFile.getOriginalFilename();
         String newName = UUID.randomUUID().toString() + oldName.substring(oldName.lastIndexOf("."), oldName.length());
         try {
@@ -263,17 +261,14 @@ public class UserDetailService implements UserDetailsService {
     }
 
     public MethodResponse deleteUserRole(DeleteUserRole deleteUserRole) {
-        System.out.println(deleteUserRole.getUserID() + " - " + deleteUserRole.getRoleID());
+//        System.out.println(deleteUserRole.getUserID() + " - " + deleteUserRole.getRoleID());
         final Optional<User> o_user = userDao.findById(deleteUserRole.getUserID());
         User user = o_user.get();
-        System.out.println("1. " + user);
         final Optional<Role> o_role = roleService.findById(deleteUserRole.getRoleID());
         Role role = o_role.get();
-        System.out.println("2. " + role);
         user.getRoles().remove(role);
         try {
             userDao.saveAndFlush(user);
-            System.out.println("3. " + user);
         } catch (Exception e) {
             e.printStackTrace();
             return MethodResponse.failure("projectY.UserService.deleteUserRole.failure.Exception", e.toString());

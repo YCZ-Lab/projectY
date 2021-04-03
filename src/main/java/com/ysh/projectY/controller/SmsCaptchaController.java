@@ -33,7 +33,7 @@ public class SmsCaptchaController {
      */
     @PostMapping("/smsCaptcha")
     public HttpEntity<?> sendSms(@Valid @RequestBody SmsCaptcha smsCaptchaForm, HttpServletRequest req) {
-        System.out.println("SmsCaptchaForm验证完成!");
+//        System.out.println("SmsCaptchaForm验证完成!");
         MethodResponse methodResponse = smsCaptchaService.sendSmsCaptchaVerify(smsCaptchaForm.getMobilePhone(), smsCaptchaForm.getSource(), req.getRemoteAddr());
         if (!methodResponse.isSuccess()) {
             return new ResponseEntity<>(JsonResponse.failure(HttpStatus.UNPROCESSABLE_ENTITY.value(), methodResponse.getI18nMessageKey(), methodResponse.getData(), methodResponse.getDetail()), HttpStatus.OK);

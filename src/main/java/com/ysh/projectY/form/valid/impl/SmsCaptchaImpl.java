@@ -19,7 +19,6 @@ public class SmsCaptchaImpl implements ConstraintValidator<SmsCaptcha, com.ysh.p
 
     @Override
     public boolean isValid(com.ysh.projectY.form.SmsCaptcha smsCaptcha, ConstraintValidatorContext context) {
-        System.out.println("Into: SmsCaptchaValidatorImpl.isValid()");
         // 关闭默认消息
         context.disableDefaultConstraintViolation();
         if (!Arrays.asList(ALL_SOURCE).contains(smsCaptcha.getSource())) {

@@ -23,7 +23,6 @@ public class DeleteUserRoleImpl implements ConstraintValidator<DeleteUserRole, c
 
     @Override
     public boolean isValid(com.ysh.projectY.form.DeleteUserRole deleteUserRole, ConstraintValidatorContext context) {
-        System.out.println("*****************************************************==> ");
         // 关闭默认消息
         context.disableDefaultConstraintViolation();
         final Optional<User> o_user = userDetailService.findById(deleteUserRole.getUserID());

@@ -22,7 +22,6 @@ public class UpdateUserImpl implements ConstraintValidator<UpdateUser, com.ysh.p
 
     @Override
     public boolean isValid(com.ysh.projectY.form.UpdateUser updateUser, ConstraintValidatorContext context) {
-        System.out.println("*****************************************************==> ");
         // 关闭默认消息
         context.disableDefaultConstraintViolation();
         final Optional<User> optional = userDetailService.findById(updateUser.getId());

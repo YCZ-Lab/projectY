@@ -49,7 +49,7 @@ public class BCSchoolsCOVID19Controller {
         if (pageSize > 1000) {
             pageSize = 1000;
         }
-        System.out.println(notificationDate);
+//        System.out.println(notificationDate);
         if (!"".equals(notificationDate) && notificationDate.length() >= 10) {
             notificationDate = notificationDate.substring(0, 10);
         }

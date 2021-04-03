@@ -30,21 +30,21 @@ public class SessionListener {
 
     @EventListener
     private void onHttpSessionCreatedEvent(HttpSessionCreatedEvent event) {
-        System.out.println("HttpSessionCreatedEvent: " + ((HttpSessionCreatedEvent) event).getSession().getId());
+//        System.out.println("HttpSessionCreatedEvent: " + ((HttpSessionCreatedEvent) event).getSession().getId());
     }
 
     @EventListener
     private void onHttpSessionIdChangedEvent(HttpSessionIdChangedEvent event) {
         String sessionID = event.getOldSessionId();
         String remarks = event.getNewSessionId();
-        System.out.println("HttpSessionIdChangedEvent: " + sessionID + " --> " + remarks);
+//        System.out.println("HttpSessionIdChangedEvent: " + sessionID + " --> " + remarks);
         updateLoginLogs(sessionID, remarks);
     }
 
     @EventListener
     private void onHttpSessionDestroyedEvent(HttpSessionDestroyedEvent event) {
         String sessionID = event.getSession().getId();
-        System.out.println("HttpSessionDestroyedEvent: " + ((HttpSessionDestroyedEvent) event).getSession().getId());
+//        System.out.println("HttpSessionDestroyedEvent: " + ((HttpSessionDestroyedEvent) event).getSession().getId());
         String remarks = "";
         ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         if (requestAttributes != null) {
@@ -79,11 +79,11 @@ public class SessionListener {
 
     @EventListener
     private void onInteractiveAuthenticationSuccessEvent(InteractiveAuthenticationSuccessEvent event) {
-        System.out.println("1==> " + ((InteractiveAuthenticationSuccessEvent) event).getAuthentication());
-        System.out.println("2==> " + ((InteractiveAuthenticationSuccessEvent) event).getAuthentication().getClass());
-        System.out.println("3==> " + ((InteractiveAuthenticationSuccessEvent) event).getAuthentication().getDetails());
-        System.out.println("4==> " + event.getGeneratedBy());
-        System.out.println("5==> " + event.getSource());
+//        System.out.println("1==> " + ((InteractiveAuthenticationSuccessEvent) event).getAuthentication());
+//        System.out.println("2==> " + ((InteractiveAuthenticationSuccessEvent) event).getAuthentication().getClass());
+//        System.out.println("3==> " + ((InteractiveAuthenticationSuccessEvent) event).getAuthentication().getDetails());
+//        System.out.println("4==> " + event.getGeneratedBy());
+//        System.out.println("5==> " + event.getSource());
         if (event.getSource().getClass().getName().contains("RememberMe")) {
             LoginLogs loginLogs = new LoginLogs();
             Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -139,18 +139,15 @@ public class SessionListener {
     private void updateLoginLogs(String sessionID, String remarks) {
         List<LoginLogs> loginLogs = loginLogsService.findBySessionID(sessionID);
         if (loginLogs != null && loginLogs.size() > 0) {
-            System.out.println("1111111111111");
             for (LoginLogs loginLog : loginLogs) {
                 loginLog.setLogoutDateTime(new Timestamp(System.currentTimeMillis()));
                 loginLog.setRemarks(remarks + ", " + loginLog.getRemarks());
             }
             loginLogsService.saveAll(loginLogs);
         } else {
-            System.out.println("2222222222222");
             LoginLogs incompleteLoginLogs = new LoginLogs();
             Authentication auth = SecurityContextHolder.getContext().getAuthentication();
             if (auth == null) {
-                System.out.println("3333333333333");
             }
             User user = null;
             if (auth != null) {
@@ -161,7 +158,6 @@ public class SessionListener {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                System.out.println("USER: " + user);
                 if (user != null) {
                     incompleteLoginLogs.setUsername(user.getUsername());
                     incompleteLoginLogs.setMobilePhone(user.getMobilePhone());

@@ -122,9 +122,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //                .tokenValiditySeconds(60 * 60 * 24 * 30)
 //                .useSecureCookie(true);
 
-        System.out.println("sslEnabled: " + sslEnabled);
+//        System.out.println("sslEnabled: " + sslEnabled);
         if (sslEnabled) {
-            System.out.println("YYY");
             httpSecurity.rememberMe()
 //                .rememberMeCookieDomain("xclass.highspeed.vip")
                     .rememberMeCookieName("projectY")
@@ -134,7 +133,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .tokenValiditySeconds(60 * 60 * 24 * 30)
                     .useSecureCookie(true);
         } else {
-            System.out.println("XXX");
             httpSecurity.rememberMe()
 //                .rememberMeCookieDomain("xclass.highspeed.vip")
                     .rememberMeCookieName("projectY")

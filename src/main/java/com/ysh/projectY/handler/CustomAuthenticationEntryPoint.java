@@ -24,7 +24,6 @@ public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint 
 
     @Override
     public void commence(HttpServletRequest req, HttpServletResponse resp, AuthenticationException authException) throws IOException {
-        System.out.println("2. +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
         authException.printStackTrace();
         resp.setStatus(401);
         resp.setHeader("Access-Control-Allow-Headers", "*");

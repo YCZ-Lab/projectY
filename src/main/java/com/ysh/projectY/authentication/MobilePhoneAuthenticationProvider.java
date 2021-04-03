@@ -107,11 +107,10 @@ public class MobilePhoneAuthenticationProvider implements AuthenticationProvider
         if (authentication.getCredentials() == null) {
             throw new BadCredentialsException(this.messages.getMessage("AbstractUserDetailsAuthenticationProvider.badCredentials", "Bad credentials"));
         }
-        System.out.println("*************************************************");
         String username = determineUsername(authentication);
         String smsCaptcha = authentication.getCredentials().toString();
-        System.out.println("username: " + username);
-        System.out.println("smsCaptcha: " + smsCaptcha);
+//        System.out.println("username: " + username);
+//        System.out.println("smsCaptcha: " + smsCaptcha);
         final MethodResponse methodResponse = smsCaptchaService.verifySmsCaptcha(username, smsCaptcha);
         if (!methodResponse.isSuccess()) {
             throw new MobilePhoneBadCredentialsException(methodResponse.getI18nMessageKey());

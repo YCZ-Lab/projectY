@@ -27,7 +27,6 @@ public class AddUserRoleImpl implements ConstraintValidator<AddUserRole, com.ysh
 
     @Override
     public boolean isValid(com.ysh.projectY.form.AddUserRole addUserRole, ConstraintValidatorContext context) {
-        System.out.println("*****************************************************==> ");
         // 关闭默认消息
         context.disableDefaultConstraintViolation();
         final Optional<User> o_user = userDetailService.findById(addUserRole.getUserID());

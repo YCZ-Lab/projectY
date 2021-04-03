@@ -16,7 +16,6 @@ public class RegisterUserImpl implements ConstraintValidator<RegisterUser, com.y
 
     @Override
     public boolean isValid(com.ysh.projectY.form.RegisterUser registerUser, ConstraintValidatorContext context) {
-        System.out.println("Into: UserValidatorImpl.isValid()");
         // 关闭默认消息
         context.disableDefaultConstraintViolation();
         if (userDetailService.findByUsername(registerUser.getUsername()).isPresent()) {

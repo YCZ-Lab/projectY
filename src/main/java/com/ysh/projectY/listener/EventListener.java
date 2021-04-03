@@ -26,15 +26,14 @@ public class EventListener implements ApplicationListener<ApplicationEvent> {
         if (event instanceof ServletRequestHandledEvent) {
             return;
         }
-        System.out.println("==========================EVENT==========================");
 //        ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
 //        if (requestAttributes != null) {
 //            System.out.println("1==> " + requestAttributes.getRequest().getRequestURI());
 //        } else {
 //            System.out.println("2==> requestAttributes is Null");
 //        }
-        System.out.println("3==> " + event.getClass());
-        System.out.println("4==> " + event.getSource().getClass());
+//        System.out.println("3==> " + event.getClass());
+//        System.out.println("4==> " + event.getSource().getClass());
         if (event instanceof AbstractAuthenticationEvent) {
             System.out.println("8==> " + ((AbstractAuthenticationEvent) event).getAuthentication());
             System.out.println("9==> " + ((AbstractAuthenticationEvent) event).getAuthentication().getClass());

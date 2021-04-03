@@ -77,7 +77,6 @@ public class AuthenticationFailureHandler extends SimpleUrlAuthenticationFailure
 
     private void userLockedCheckByUsername(String username) {
         int count = loginLogsService.findLastFailureCountByUsername(username);
-        System.out.println("count--> : " + count);
         if (count >= 3) {
             final Optional<User> optional = userDetailService.findByUsername(username);
             if (optional.isPresent()) {
@@ -90,7 +89,6 @@ public class AuthenticationFailureHandler extends SimpleUrlAuthenticationFailure
 
     private void userLockedCheckByMobilePhone(String mobilePhone) {
         int count = loginLogsService.findLastFailureCountByMobilePhone(mobilePhone);
-        System.out.println("count==>: " + count);
         if (count >= 3) {
             final Optional<User> optional = userDetailService.findByMobilePhone(mobilePhone);
             if (optional.isPresent()) {

@@ -23,7 +23,6 @@ public class CustomAccessDeniedHandler implements AccessDeniedHandler {
 
     @Override
     public void handle(HttpServletRequest req, HttpServletResponse resp, AccessDeniedException accessDeniedException) throws IOException, ServletException {
-        System.out.println("1. +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
 //        accessDeniedException.printStackTrace();
         resp.setHeader("Access-Control-Allow-Headers", "*");
         resp.setHeader("Access-Control-Allow-Methods", "OPTIONS, GET, POST, PUT");

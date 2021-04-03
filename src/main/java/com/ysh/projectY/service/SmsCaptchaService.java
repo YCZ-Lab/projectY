@@ -79,7 +79,7 @@ public class SmsCaptchaService {
 //            PublishResponse response = snsClient.publish(request);
 //            System.out.println("Status was " + response.sdkHttpResponse().statusCode());
             smsCaptchaDao.saveAndFlush(smsCaptcha);
-            System.out.println("验证码: " + smsCaptcha.getCaptcha());
+//            System.out.println("验证码: " + smsCaptcha.getCaptcha());
         } catch (SnsException e) {
             return MethodResponse.failure("projectY.SmsCaptchaService.sendSmsCaptcha.failure.SnsException", e.toString());
         } catch (AwsServiceException e) {

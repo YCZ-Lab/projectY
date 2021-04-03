@@ -24,9 +24,7 @@ public class SchoolDistrictContactsService {
     }
 
     public void deleteById(int id) {
-        System.out.println("333");
         schoolDistrictContactsDao.deleteById(id);
-        System.out.println("444");
     }
 
     public void saveAndFlush(SchoolDistrictContacts schoolDistrictContacts) {
